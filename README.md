@@ -17,8 +17,8 @@
     res://    
     ├── android/  →  Configuración de exportación 
     ├── assets/                
-        ├── sprites/ 
-        ├── sonidos/ 
+    |    ├── sprites/ 
+    |    └── sonidos/ 
     ├── autoload/  →  Script global con estado del juego              
     ├── scenes/  →  Escenas principales (nave, asteroides, controles) 
     ├── scripts/  →  Lógica de movimiento, colisiones y HUD 
