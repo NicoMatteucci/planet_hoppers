@@ -14,21 +14,21 @@
 
 ## 📦 Estructura del proyecto
 
-res://    
-├── android/  →  Configuración de exportación 
+    res://    
+    ├── android/  →  Configuración de exportación 
+    
+    ├── assets/                
 
-├── assets/                
+        ├── sprites/ 
+    
+        ├── sonidos/ 
 
-    ├── sprites/ 
-
-    ├── sonidos/ 
-
-├── autoload/  →  Script global con estado del juego              
-
-├── scenes/  →  Escenas principales (nave, asteroides, controles) 
-
-├── scripts/  →  Lógica de movimiento, colisiones y HUD 
-└── export_presets.cfg  →  Configuración de exportación Android
+    ├── autoload/  →  Script global con estado del juego              
+    
+    ├── scenes/  →  Escenas principales (nave, asteroides, controles) 
+    
+    ├── scripts/  →  Lógica de movimiento, colisiones y HUD 
+    └── export_presets.cfg  →  Configuración de exportación Android
 
 
 ---
