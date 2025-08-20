@@ -1,3 +1,4 @@
+#player.gd
 extends CharacterBody2D
 
 @export var velocidad := 100.0
@@ -18,3 +19,7 @@ func _physics_process(delta):
 
 	velocity = velocity.limit_length(velocidad)
 	move_and_slide()
+
+func rebote(punto_colision: Vector2):
+	var normal := (global_position - punto_colision).normalized()
+	velocity = velocity.bounce(normal) * 0.8  # Rebote con amortiguación

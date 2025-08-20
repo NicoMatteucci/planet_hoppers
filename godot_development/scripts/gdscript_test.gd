@@ -1,3 +1,4 @@
+#gdscript_test.gd
 extends Node2D
 
 # Desde cualquier script
