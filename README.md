@@ -18,9 +18,9 @@ res://
 
 ├── assets/                
 
-|   ├── sprites/ 
+|      ├── sprites/ 
 
-|   ├── sonidos/ 
+|      ├── sonidos/ 
 
 ├── autoload/             # Script global con estado del juego 
 
