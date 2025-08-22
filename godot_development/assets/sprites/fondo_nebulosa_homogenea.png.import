@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br4bonl6488wq"
-path="res://.godot/imported/left_rotation.png-3bf250440451fb287d61ce3bb90750ae.ctex"
+uid="uid://seovsmf70qk3"
+path="res://.godot/imported/fondo_nebulosa_homogenea.png-12c07a770a61d4a373e52415aeb3a8c3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/left_rotation.png"
-dest_files=["res://.godot/imported/left_rotation.png-3bf250440451fb287d61ce3bb90750ae.ctex"]
+source_file="res://assets/sprites/fondo_nebulosa_homogenea.png"
+dest_files=["res://.godot/imported/fondo_nebulosa_homogenea.png-12c07a770a61d4a373e52415aeb3a8c3.ctex"]
 
 [params]
 

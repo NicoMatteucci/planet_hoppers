@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjd8ckxmms1cl"]
+
+[ext_resource type="Texture2D" uid="uid://bncd1v1hffyof" path="res://assets/sprites/fondo_espacial.png" id="1_rysn1"]
+
+[node name="Space" type="Node2D"]
+
+[node name="FondoEspacial" type="Sprite2D" parent="."]
+position = Vector2(534.25, 301.625)
+scale = Vector2(0.384055, 0.405436)
+texture = ExtResource("1_rysn1")

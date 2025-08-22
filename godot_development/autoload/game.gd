@@ -4,21 +4,6 @@ extends Node2D
 var score := 0
 var lives := 3
 
-func _ready():
-	randomize()
-	var plyr := preload("res://scenes/player.tscn").instantiate()
-	plyr.position = get_viewport_rect().size / 2
-	add_child(plyr)
-	
-	var controles_scene := preload("res://scenes/controls.tscn")
-	var controles := controles_scene.instantiate()
-	add_child(controles)
-	
-	add_child(timer)
-	timer.wait_time = 1.0
-	timer.autostart = true
-	timer.timeout.connect(_on_timer_timeout)
-
 func _on_TouchScreenButton_pressed():
 	print("¡Botón presionado!")
 
@@ -26,23 +11,30 @@ func _on_TouchScreenButton_pressed():
 
 func crear_asteroide():
 	var asteroide := preload("res://scenes/asteroid.tscn").instantiate()
-
-	# Posición aleatoria fuera de pantalla (por arriba)
-	var x := randf_range(100, 980)
-	var y := randf_range(200, 50)
-	asteroide.global_position = Vector2(x, y)
-
-	# Tamaño aleatorio
-	var escala := randf_range(0.05, 0.3)
-	asteroide.scale = Vector2(escala, escala)
-
-	# Si usás un radio en el script del asteroide
-	if asteroide.has_variable("radio"):
-		asteroide.radio *= escala
-
 	add_child(asteroide)
-
+	move_to_front()
+ 
 func _on_timer_timeout():
-	var cantidad := randi() % 4 + 2  # Entre 2 y 5 asteroides
-	for i in cantidad:
-		crear_asteroide()
+	#print("¡Timer vencido!")
+	crear_asteroide()
+
+func _ready():
+	randomize()
+	var viewport_size := get_viewport_rect().size
+	
+	var plyr := preload("res://scenes/player.tscn").instantiate()
+	plyr.position = viewport_size / 2
+	plyr.position.y = viewport_size.y -30
+	plyr.velocity = Vector2(0,-50)
+	add_child(plyr)
+	
+	var controles_scene := preload("res://scenes/controls.tscn")
+	var controles := controles_scene.instantiate()
+	add_child(controles)
+	
+	# No necesitas add_child(timer), ya que @onready lo hace automáticamente
+	timer.wait_time = 1.0
+	timer.timeout.connect(_on_timer_timeout)
+	add_child(timer)
+	timer.start()
+	#print("¡Fin ready!")

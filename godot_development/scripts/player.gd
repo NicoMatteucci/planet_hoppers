@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var velocidad := 100.0
 @export var aceleracion := 300.0
 @export var rotacion_vel := 3.0
+@export var init_status := true
 
 func _physics_process(delta):
 	var direccion := Vector2.ZERO
@@ -21,5 +22,6 @@ func _physics_process(delta):
 	move_and_slide()
 
 func rebote(punto_colision: Vector2):
+	print("¡Rebote!")
 	var normal := (global_position - punto_colision).normalized()
 	velocity = velocity.bounce(normal) * 0.8  # Rebote con amortiguación
