@@ -4,23 +4,61 @@ extends Node2D
 var score := 0
 var lives := 3
 
+
+
 func _on_TouchScreenButton_pressed():
 	print("¡Botón presionado!")
 
 @onready var timer := Timer.new()
 
+
 func crear_asteroide():
 	var asteroide := preload("res://scenes/asteroid.tscn").instantiate()
+	var viewport_size := get_viewport_rect().size
+	var spawn_pos: Vector2
+	var margin := 200
+	
+	# Determina el lado de la pantalla por donde aparecerá el asteroide.
+	var side := randi_range(0, 3)
+	
+	if side == 0: # Lado superior
+		spawn_pos.x = randf_range(-margin, viewport_size.x + margin)
+		spawn_pos.y = -margin
+	elif side == 1: # Lado derecho
+		spawn_pos.x = viewport_size.x + margin
+		spawn_pos.y = randf_range(-margin, viewport_size.y + margin)
+	elif side == 2: # Lado inferior
+		spawn_pos.x = randf_range(-margin, viewport_size.x + margin)
+		spawn_pos.y = viewport_size.y + margin
+	else: # Lado izquierdo
+		spawn_pos.x = -margin
+		spawn_pos.y = randf_range(-margin, viewport_size.y + margin)
+
+	asteroide.global_position = spawn_pos
+	
+	# Ahora el asteroide se dirige a un punto aleatorio dentro de la pantalla.
+	var target_pos := Vector2(randf_range(0, viewport_size.x), randf_range(0, viewport_size.y))
+	var direccion: Vector2 = (target_pos - asteroide.global_position).normalized()
+	
+	var velocidad_aleatoria := randf_range(100, 200)
+	# Se usa linear_velocity para que el RigidBody2D se mueva con la física.
+	asteroide.linear_velocity = direccion * velocidad_aleatoria
+	
+	var escala := randf_range(0.05, 0.1)
+	asteroide.scale = Vector2(escala, escala)
+	
 	add_child(asteroide)
 	move_to_front()
  
 func _on_timer_timeout():
-	#print("¡Timer vencido!")
 	crear_asteroide()
 
 func _ready():
 	randomize()
 	var viewport_size := get_viewport_rect().size
+	
+	var space := preload("res://scenes/space.tscn").instantiate()
+	add_child(space)
 	
 	var plyr := preload("res://scenes/player.tscn").instantiate()
 	plyr.position = viewport_size / 2
@@ -32,9 +70,7 @@ func _ready():
 	var controles := controles_scene.instantiate()
 	add_child(controles)
 	
-	# No necesitas add_child(timer), ya que @onready lo hace automáticamente
-	timer.wait_time = 1.0
+	timer.wait_time = 0.25
 	timer.timeout.connect(_on_timer_timeout)
 	add_child(timer)
 	timer.start()
-	#print("¡Fin ready!")
