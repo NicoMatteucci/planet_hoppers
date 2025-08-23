@@ -1,6 +1,45 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8dij7e1c1ipp"]
+[gd_scene load_steps=4 format=3 uid="uid://b8dij7e1c1ipp"]
 
-[ext_resource type="Script" uid="uid://bgkkudoloqgt7" path="res://scripts/gdscript_test.gd" id="1_o5qli"]
+[sub_resource type="GDScript" id="GDScript_sgp6g"]
+script/source = "#gdscript_test.gd
+extends Node2D
+
+# Desde cualquier script
+func _on_asteroid_hit():
+	game.lives -= 1
+	game.score += 100
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_sgp6g"]
+font_size = 64
+font_color = Color(1, 0, 0, 1)
+outline_size = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_o5qli"]
+font_size = 28
 
 [node name="main" type="Node2D"]
-script = ExtResource("1_o5qli")
+script = SubResource("GDScript_sgp6g")
+
+[node name="game_over_canvas_layer" type="CanvasLayer" parent="."]
+
+[node name="game_over_label" type="Label" parent="game_over_canvas_layer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -11.5
+offset_right = 48.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "¡GAME OVER!"
+label_settings = SubResource("LabelSettings_sgp6g")
+vertical_alignment = 1
+
+[node name="game_lives_label" type="Label" parent="game_over_canvas_layer"]
+offset_right = 40.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_o5qli")

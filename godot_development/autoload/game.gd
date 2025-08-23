@@ -1,15 +1,40 @@
 #game.gd
 extends Node2D
 
+signal lives_changed(new_lives)
+
 var score := 0
-var lives := 3
+var lives := 4
 
+func lose_life() -> void:
+	lives = clamp(lives - 1, 0, 4)
+	emit_signal("lives_changed", lives)
+	actualizar_lives()
+	
+func actualizar_lives():
+	var hearts = ""
+	for i in range(lives):
+		hearts += "❤️"  # Podés cambiar por 💚, 💙 o el que te guste
+	game_lives_label.text = hearts
 
+	
+	if lives <= 0:
+		game_over()
+
+func game_over():
+	$player.queue_free()
+	if game_over_label:
+		game_over_label.visible = true
+		print("¡GAME OVER!")
+
+	get_tree().paused = true
 
 func _on_TouchScreenButton_pressed():
 	print("¡Botón presionado!")
 
 @onready var timer := Timer.new()
+@onready var game_over_label = get_node("/root/main/game_over_canvas_layer/game_over_label")
+@onready var game_lives_label = get_node("/root/main/game_over_canvas_layer/game_lives_label")
 
 
 func crear_asteroide():
@@ -55,6 +80,9 @@ func _on_timer_timeout():
 
 func _ready():
 	randomize()
+	game_over_label.visible = false
+	game_lives_label.visible = true
+	actualizar_lives()
 	var viewport_size := get_viewport_rect().size
 	
 	var space := preload("res://scenes/space.tscn").instantiate()

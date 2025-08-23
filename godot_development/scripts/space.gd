@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var backgrounds = [
 	"res://assets/sprites/fondo_nebulosa_homogenea.png",
-	"res://assets/sprites/fondo_nebulosa_alejada.png",
+	"res://assets/sprites/fondo_nerbulosa_alejada.png",
 	"res://assets/sprites/fondo_espacial.png",
 	"res://assets/sprites/fondo_choque_planetario.png",
 	"res://assets/sprites/fondo_radiacion_roja.png",
